@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<!--<h1 class="text-blue-500 text-center text-3xl p-4 mb-4" >Add Task</h1>-->
+<!--<form class="max-w-xl mx-auto flex gap-4 " th:action="@{/todos/new}" method="post">-->
+<!--    <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" th:field="${new.task}" placeholder="Task Title">-->
+<!--    <input type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" th:field="${new.description}" placeholder="Task description">-->
+<!--    <button class=" py-2 px-4 bg-blue-200 rounded-lg" type="submit">Save</button>-->
+<!--</form>-->
+<!--<div class="max-w-xl mx-auto mt-8">-->
+<!--    <button class=" py-2 px-4 border border-2 border-blue-200 rounded-lg"><a href="/todos"  >Back to todo List</a></button>-->
+<!--</div>-->
+
+
+<main class="h-screen grid place-content-center place-items-center">
+    <form class=" w-[500px] rounded-xl mx-auto space-y-4 border  p-8 "  th:action="@{/todos/new}"  method="post">
+        <h1 class="text-blue-500 text-center text-3xl p-4" >Add Task</h1>
+        <div class="space-y-2">
+            <label >Task</label>
+            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" th:field="${new.task}" placeholder="Task Title">
+        </div>
+        <div class="space-y-2">
+            <label>Task's Description</label>
+            <textarea type="text" rows="4" cols="50"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" th:field="${new.description}" placeholder="Task Description"></textarea>
+        </div>
+        <button class=" py-2 px-4 bg-blue-200 rounded-lg" type="submit">Save</button>
+        <button class=" py-2 px-4 border border-2 border-blue-200 rounded-lg"><a href="/todos"  >Back to todo List</a></button>
+    </form>
+</main>
+</body>
+</html>

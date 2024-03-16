@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList-Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h1 class="text-blue-500 text-center text-3xl p-4">TodoList-Detail</h1>
+    <div class="p-8 relative overflow-x-auto  sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 " >
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+        <tr class="text-based">
+            <th scope="col" class="px-6 py-3">ID</th>
+            <th scope="col" class="px-6 py-3">Task</th>
+            <th scope="col" class="px-6 py-3">Description</th>
+            <th scope="col" class="px-6 py-3">Done</th>
+            <th scope="col" class="px-6 py-3">Created Date</th>
+            <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+        </thead>
+
+        <tr class="odd:bg-white even:bg-gray-50 ">
+            <td class="px-6 py-4" th:text="${todo.id}"></td>
+            <td class="px-6 py-4" th:text="${todo.task}"></td>
+            <td class="px-6 py-4" th:text="${todo.description}"></td>
+            <td class="px-6 py-4" >
+                <input type="checkbox" name="isDone" class=" w-6 h-6" th:checked="${todo.isDone}"  th:disabled="${disableCheckbox}"/>
+            </td>
+            <td class="px-6 py-4" th:text="${todo.createAt}"></td>
+            <td class="px-6 py-4">
+                <a class="py-2 px-4 bg-green-200 rounded-lg" th:href="@{/todos/{id}(id=${todo.id})}">View</a>
+                <a class="py-2 px-4 bg-blue-200 rounded-lg" th:href="@{/todos/edit/{id}(id=${todo.id})}">Edit</a>
+                <a class="py-2 px-4 bg-red-200 rounded-lg" th:href="@{/todos/delete/{id}(id=${todo.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+     <div class="max-w-xl mt-8">
+         <button class=" py-2 px-4 border border-2 border-blue-200 rounded-lg"><a href="/todos"  >Back to todo List</a></button>
+     </div>
+
+</div>
+    <script>
+        function updateTodoStatus(checkbox) {
+            var isChecked = checkbox.checked;
+            var todoId = checkbox.getAttribute('data-todo-id');
+            console.log(todoId)
+
+            // Send an AJAX request to update the todo status on the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/todos/edit/' + todoId);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log('Todo status updated successfully');
+                } else {
+                    console.error('Failed to update todo status');
+                }
+            };
+            xhr.send(JSON.stringify({ isDone: isChecked }));
+
+        }
+    </script>
+</body>
+</html>
